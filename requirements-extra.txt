@@ -1,6 +1,7 @@
-# optional, for the transformer / CLIP / zero-shot runs (need Hugging Face + an API key; not exercised in CI)
+# optional, for the real-model and real-data runs (need Hugging Face access; not exercised in CI)
+torch
 sentence-transformers
 open-clip-torch
-torch
+pillow
 transformers
 anthropic

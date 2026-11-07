@@ -5,3 +5,4 @@ data/transactions.csv
 data/price_history_summary.csv
 data/raw/
 .venv/
+data/cache/

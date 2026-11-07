@@ -13,12 +13,16 @@
 | Match | TF-IDF (char n-gram) + SVD, text only | NDCG@10 0.700, P@1 0.597, recall@10 0.838 |
 | Match | + simulated image vector, weight 0.25 | NDCG@10 0.710, P@1 0.603 (a +0.010 NDCG change, one seed, no confidence interval) |
 | Match | + simulated image vector, weight 0.5 | NDCG@10 0.641 (worse) |
+| Match | MiniLM-L6-v2 sentence embeddings, text only (run on a Mac, same twin) | NDCG@10 0.409, P@1 0.322, recall@10 0.539: worse than TF-IDF (0.700). Likely cause: the twin's identifying signal is rare lexical detail words, which TF-IDF matches exactly; untested. |
 | Attributes | TF-IDF + logistic regression, scored on true labels | product type 99.8%, colour 91.6%, department 75.7% |
 | Prices | markdown detection vs planted | precision 1.00, recall 0.89, offset error 0.38 weeks, depth error 0.003 |
 | Prices | time-to-markdown, gradient boosting vs type mean | MAE 3.6 vs 5.7 weeks |
 | Forecast | rolling-origin WAPE, 4-week horizon | last-4-week mean 0.115, ridge with Fourier terms 0.270, seasonal naive 0.463 |
 
-Not run (code present, no numbers claimed): sentence-transformer embeddings, CLIP, fine-tuned transformer, zero-shot LLM.
+Not run (code present, no numbers claimed): CLIP, fine-tuned transformer, zero-shot LLM.
+
+## Real data (code written, results pending)
+The twin results above partly reflect how the twin was generated. `scripts/run_shopee.py` (real titles and images with labelled match groups), `scripts/run_hm_attributes.py` and `scripts/run_hm_prices.py` run the same evaluation harnesses on Kaggle's Shopee Price Match Guarantee and H&M datasets, both non-commercial and never committed. This section is filled in from `reports/shopee_*.json`, `reports/hm_attributes_*.json` and `reports/hm_prices.json` once they exist; until then no real-data claim is made.
 
 ## Where it fails
 - Department is the weakest attribute: 235 of the errors are Ladieswear/Menswear swaps, because many descriptions never say who the item is for. Flagging label disagreements finds nearly all planted department errors (recall 0.95) but with precision 0.19, so it is a review queue, not an auto-fix. Colour flagging has precision 0.41 for the same reason.
