@@ -1,7 +1,9 @@
-import json
+import json, os
 from pptx import Presentation
 from pptx.util import Inches, Pt
 from pptx.dml.color import RGBColor
+SH = "reports/shopee_n34250.json"
+sh = json.load(open(SH))["rows"] if os.path.exists(SH) else None
 m = json.load(open("reports/match_tfidf-svd.json")); a = json.load(open("reports/attributes.json")); p = json.load(open("reports/price.json"))
 INK, MUTE, ACC = RGBColor(0x1b,0x1f,0x2a), RGBColor(0x5a,0x61,0x70), RGBColor(0x1f,0x6f,0xeb)
 prs = Presentation(); prs.slide_width, prs.slide_height = Inches(13.33), Inches(7.5)
@@ -25,15 +27,26 @@ def slide(title, bullets=None, table=None, foot="Simulated data (stylematch twin
     f.paragraphs[0].runs[0].font.size = Pt(11); f.paragraphs[0].runs[0].font.color.rgb = MUTE
 t, ti = m["text_only"], m["text_plus_image_SIMULATED_w0.25"]
 slide("What a buyer can learn from product, label and price data, and where to be careful",
-      ["Same product, different colourway or department: found automatically.",
+      ["The same product listed by different sellers, with different titles and photos: matched automatically.",
        "Wrong labels: caught for review, but not safe to auto-correct.",
        "Price architecture and markdown timing: reconstructed from sales alone.",
-       "Everything here is a simulated catalogue with a known answer key. It shows the method works, not what any retailer's market looks like."])
-slide("Matching: finding the same style across colourways and departments",
-      [f"Text-only matching puts the true match first for {t['p_at_1']:.0%} of products and finds {t['recall_at_k']:.0%} of all true matches in the top 10.",
-       f"Adding a simulated image signal moved ranking quality from {t['ndcg']:.3f} to {ti['ndcg']:.3f}: too small to claim a gain from one run.",
-       "Real image embeddings (CLIP) have not been tested yet."],
-      [["Method", "NDCG@10", "Match first"], ["Text only", f"{t['ndcg']:.3f}", f"{t['p_at_1']:.0%}"], ["Text + image (simulated)", f"{ti['ndcg']:.3f}", f"{ti['p_at_1']:.0%}"]])
+       "Matching is tested on 34,250 real listings. Labels and prices are tested on a simulated catalogue with a known answer key: that shows the method works, not what any retailer's market looks like."],
+      foot="Slide 2: real listings (Shopee Price Match Guarantee, Kaggle, non-commercial use). Slides 3 to 5: simulated data (stylematch twin).")
+if sh:
+    f, tx, im, tf = sh["text_minilm+image_clip_w0.5"], sh["text_minilm"], sh["image_clip"], sh["text_tfidf_char"]
+    slide("Matching: text and image together find the same product best",
+          [f"On 34,250 real listings, combining the title and the photo puts the true match first for {f['p_at_1']:.0%} of products and finds {f['recall_at_k']:.0%} of all true matches in the top 10.",
+           f"Title alone puts it first for {tx['p_at_1']:.0%}, the photo alone for {im['p_at_1']:.0%}: each catches matches the other misses.",
+           "A simulated catalogue and a small sample both favoured a simpler text method; the full set did not. Decisions should rest on full-scale tests."],
+          [["Method", "NDCG@10", "Match first"], ["Title + photo", f"{f['ndcg']:.3f}", f"{f['p_at_1']:.0%}"], ["Title only (MiniLM)", f"{tx['ndcg']:.3f}", f"{tx['p_at_1']:.0%}"],
+           ["Photo only (CLIP)", f"{im['ndcg']:.3f}", f"{im['p_at_1']:.0%}"], ["Title only (TF-IDF)", f"{tf['ndcg']:.3f}", f"{tf['p_at_1']:.0%}"]],
+          foot="Real listings: Shopee Price Match Guarantee (Kaggle, train split, non-commercial use). Zero-shot embeddings; nothing trained on Shopee.")
+else:
+    slide("Matching: finding the same style across colourways and departments",
+          [f"Text-only matching puts the true match first for {t['p_at_1']:.0%} of products and finds {t['recall_at_k']:.0%} of all true matches in the top 10.",
+           f"Adding a simulated image signal moved ranking quality from {t['ndcg']:.3f} to {ti['ndcg']:.3f}: too small to claim a gain from one run.",
+           "Real image embeddings (CLIP) have not been tested yet."],
+          [["Method", "NDCG@10", "Match first"], ["Text only", f"{t['ndcg']:.3f}", f"{t['p_at_1']:.0%}"], ["Text + image (simulated)", f"{ti['ndcg']:.3f}", f"{ti['p_at_1']:.0%}"]])
 acc = {r["attribute"]: r for r in a["scores"]}; ed = {r["attribute"]: r for r in a["error_detection"]}
 slide("Labels: colour and type are reliable, department is not",
       ["Department is the weak spot: many descriptions never say who the item is for, so men's and women's items get swapped.",

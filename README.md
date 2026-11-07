@@ -2,7 +2,7 @@
 
 Product matching, attribute extraction and price intelligence for fashion retail, scored against a planted answer key, with a matcher served over FastAPI.
 
-**Status:** every number in this repo comes from a **simulated twin** (labelled as such). Sentence-transformer, CLIP, fine-tuned transformer and zero-shot LLM runs are implemented as optional one-command runs but **have not been run**; the real H&M path is untested. See [MODEL_CARD.md](MODEL_CARD.md).
+**Status:** matching is evaluated on **real listings** (Kaggle Shopee Price Match Guarantee: 34,250 postings, 11,014 labelled match groups): MiniLM title embeddings plus CLIP image embeddings reach **NDCG@10 0.766** (95% interval 0.760 to 0.772), against 0.639 for text alone and 0.602 for images alone. Attributes and prices are scored on a **simulated twin** with a planted answer key; the H&M real-data runs are written and pending. See [MODEL_CARD.md](MODEL_CARD.md) for every result, including where the twin and a small sample pointed the wrong way.
 
 ```bash
 pip install -r requirements.txt
