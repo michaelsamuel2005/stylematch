@@ -1,0 +1,92 @@
+{
+ "dataset": "Shopee Price Match Guarantee (Kaggle), train split",
+ "postings": 3001,
+ "groups": 920,
+ "k": 10,
+ "train_csv_sha": "591a9e01eb17",
+ "timings_s": {
+  "tfidf": 1.4,
+  "minilm": 0.0,
+  "clip": 0.1
+ },
+ "clip_model": "clip:ViT-B-32:openai",
+ "rows": {
+  "text_tfidf_char": {
+   "queries": 3001,
+   "ndcg": 0.8604330203609781,
+   "p_at_1": 0.8287237587470843,
+   "p_at_k": 0.3434855048317228,
+   "recall_at_k": 0.8520706709340053,
+   "k": 10
+  },
+  "text_minilm": {
+   "queries": 3001,
+   "ndcg": 0.8188938909655763,
+   "p_at_1": 0.8183938687104299,
+   "p_at_k": 0.319893368877041,
+   "recall_at_k": 0.7913146010183922,
+   "k": 10
+  },
+  "image_clip": {
+   "queries": 3001,
+   "ndcg": 0.7366529057367213,
+   "p_at_1": 0.7524158613795402,
+   "p_at_k": 0.29500166611129625,
+   "recall_at_k": 0.708016003861582,
+   "k": 10
+  },
+  "text_minilm+image_clip_w0.25": {
+   "queries": 3001,
+   "ndcg": 0.8763371063543485,
+   "p_at_1": 0.8693768743752083,
+   "p_at_k": 0.3396534488503832,
+   "recall_at_k": 0.8480434551319016,
+   "k": 10
+  },
+  "text_minilm+image_clip_w0.5": {
+   "queries": 3001,
+   "ndcg": 0.911194408784746,
+   "p_at_1": 0.9040319893368877,
+   "p_at_k": 0.3511829390203266,
+   "recall_at_k": 0.8750802852545514,
+   "k": 10
+  },
+  "text_minilm+image_clip_w0.75": {
+   "queries": 3001,
+   "ndcg": 0.8885377572140478,
+   "p_at_1": 0.8900366544485172,
+   "p_at_k": 0.343785404865045,
+   "recall_at_k": 0.849926770562578,
+   "k": 10
+  },
+  "text_tfidf_char+image_clip_w0.25": {
+   "queries": 3001,
+   "ndcg": 0.8911187174069729,
+   "p_at_1": 0.870376541152949,
+   "p_at_k": 0.35001666111296237,
+   "recall_at_k": 0.8696185995444616,
+   "k": 10
+  },
+  "text_tfidf_char+image_clip_w0.5": {
+   "queries": 3001,
+   "ndcg": 0.9179249739023333,
+   "p_at_1": 0.898700433188937,
+   "p_at_k": 0.3554815061646119,
+   "recall_at_k": 0.891285371363288,
+   "k": 10,
+   "ndcg_ci95_bootstrap": [
+    0.9061776228202624,
+    0.933295225508174
+   ]
+  },
+  "text_tfidf_char+image_clip_w0.75": {
+   "queries": 3001,
+   "ndcg": 0.9164022671219828,
+   "p_at_1": 0.9046984338553815,
+   "p_at_k": 0.35404865044985007,
+   "recall_at_k": 0.8838801772338002,
+   "k": 10
+  }
+ },
+ "best": "text_tfidf_char+image_clip_w0.5"
+}

@@ -1,0 +1,92 @@
+{
+ "dataset": "Shopee Price Match Guarantee (Kaggle), train split",
+ "postings": 34250,
+ "groups": 11014,
+ "k": 10,
+ "train_csv_sha": "591a9e01eb17",
+ "timings_s": {
+  "tfidf": 12.9,
+  "minilm": 50.3,
+  "clip": 582.3
+ },
+ "clip_model": "clip:ViT-B-32-quickgelu:openai",
+ "rows": {
+  "text_tfidf_char": {
+   "queries": 34250,
+   "ndcg": 0.5434000926688111,
+   "p_at_1": 0.5389197080291971,
+   "p_at_k": 0.20555328467153286,
+   "recall_at_k": 0.5682575673235403,
+   "k": 10
+  },
+  "text_minilm": {
+   "queries": 34250,
+   "ndcg": 0.6387338749941566,
+   "p_at_1": 0.6313868613138686,
+   "p_at_k": 0.22851094890510948,
+   "recall_at_k": 0.6605247564786735,
+   "k": 10
+  },
+  "image_clip": {
+   "queries": 34250,
+   "ndcg": 0.6022818874034573,
+   "p_at_1": 0.6186861313868613,
+   "p_at_k": 0.22455474452554744,
+   "recall_at_k": 0.6029220715770441,
+   "k": 10
+  },
+  "text_minilm+image_clip_w0.25": {
+   "queries": 34250,
+   "ndcg": 0.7115667862630093,
+   "p_at_1": 0.6965839416058394,
+   "p_at_k": 0.2548,
+   "recall_at_k": 0.734291126198995,
+   "k": 10
+  },
+  "text_minilm+image_clip_w0.5": {
+   "queries": 34250,
+   "ndcg": 0.7657346235468344,
+   "p_at_1": 0.7428321167883212,
+   "p_at_k": 0.27535766423357666,
+   "recall_at_k": 0.7880914789449145,
+   "k": 10,
+   "ndcg_ci95_bootstrap": [
+    0.760424372085796,
+    0.7715536588562042
+   ]
+  },
+  "text_minilm+image_clip_w0.75": {
+   "queries": 34250,
+   "ndcg": 0.7552047861991306,
+   "p_at_1": 0.7388905109489051,
+   "p_at_k": 0.2744992700729927,
+   "recall_at_k": 0.7710111679141934,
+   "k": 10
+  },
+  "text_tfidf_char+image_clip_w0.25": {
+   "queries": 34250,
+   "ndcg": 0.6250826042479126,
+   "p_at_1": 0.6192408759124087,
+   "p_at_k": 0.2335211678832117,
+   "recall_at_k": 0.6494355393282814,
+   "k": 10
+  },
+  "text_tfidf_char+image_clip_w0.5": {
+   "queries": 34250,
+   "ndcg": 0.703361684521191,
+   "p_at_1": 0.6867153284671533,
+   "p_at_k": 0.26038832116788324,
+   "recall_at_k": 0.7293181143674095,
+   "k": 10
+  },
+  "text_tfidf_char+image_clip_w0.75": {
+   "queries": 34250,
+   "ndcg": 0.7397627606911708,
+   "p_at_1": 0.720029197080292,
+   "p_at_k": 0.27266277372262776,
+   "recall_at_k": 0.761963971314477,
+   "k": 10
+  }
+ },
+ "best": "text_minilm+image_clip_w0.5"
+}
