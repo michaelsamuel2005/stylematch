@@ -23,8 +23,8 @@ if not a.no_minilm:
         res["timings_s"]["minilm"] = round(time.time() - t, 1)
     except Exception as e: print("MiniLM skipped:", e)
 if not a.no_clip:
-    enc, name = R.image_encoder()
-    t = time.time(); E["image_clip"] = R.cached(f"data/cache/shopee_clip_{tag}.npy", lambda: enc(list(df.path), log=print))
+    enc, name = R.image_encoder(); slug = name.replace(":", "_")
+    t = time.time(); E["image_clip"] = R.cached(f"data/cache/shopee_{slug}_{tag}.npy", lambda: enc(list(df.path), log=print))
     res["timings_s"]["clip"] = round(time.time() - t, 1); res["clip_model"] = name
 res["rows"] = R.evaluate_rows(E, g, a.k)
 for tname in [n for n in ("text_minilm", "text_tfidf_char") if n in E]:

@@ -10,7 +10,7 @@ import numpy as np, pandas as pd
 
 # ----------------------------------------------------------------------------------------------- encoders
 
-def image_encoder(model="ViT-B-32", pretrained="openai", device=None):
+def image_encoder(model="ViT-B-32-quickgelu", pretrained="openai", device=None):
     """Return (encode(paths) -> unit vectors, name). Needs `pip install open-clip-torch torch pillow`."""
     import torch, open_clip
     from PIL import Image
