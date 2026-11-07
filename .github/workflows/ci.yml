@@ -1,0 +1,18 @@
+name: ci
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.11", cache: pip}
+      - run: pip install -r requirements.txt
+      - run: PYTHONPATH=src python -m pytest -q
+      - run: PYTHONPATH=src python -m stylematch.twin && PYTHONPATH=src python scripts/run_match.py && PYTHONPATH=src python scripts/run_attributes.py && PYTHONPATH=src python scripts/run_price.py
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t stylematch .
+      - run: docker run -d -p 8000:8000 --name s stylematch && sleep 12 && curl -sf localhost:8000/health

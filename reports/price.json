@@ -1,0 +1,107 @@
+{
+ "markdown_detection_vs_planted": {
+  "precision": 1.0,
+  "recall": 0.8883647798742138,
+  "offset_mae_weeks": 0.3756637168141593,
+  "depth_mae": 0.003082928399397883,
+  "n_planted": 2544,
+  "n_detected": 2260
+ },
+ "price_architecture": [
+  {
+   "product_type": "Coat",
+   "articles": 582,
+   "p25": 15.788,
+   "median": 24.835,
+   "p75": 37.982,
+   "markdown_rate": 0.517,
+   "median_depth": 0.4
+  },
+  {
+   "product_type": "Dress",
+   "articles": 587,
+   "p25": 15.32,
+   "median": 23.92,
+   "p75": 35.65,
+   "markdown_rate": 0.492,
+   "median_depth": 0.3
+  },
+  {
+   "product_type": "Shoes",
+   "articles": 523,
+   "p25": 16.8,
+   "median": 24.46,
+   "p75": 36.67,
+   "markdown_rate": 0.459,
+   "median_depth": 0.388
+  },
+  {
+   "product_type": "Skirt",
+   "articles": 590,
+   "p25": 17.385,
+   "median": 24.67,
+   "p75": 38.148,
+   "markdown_rate": 0.498,
+   "median_depth": 0.314
+  },
+  {
+   "product_type": "Sweater",
+   "articles": 560,
+   "p25": 16.062,
+   "median": 25.445,
+   "p75": 39.755,
+   "markdown_rate": 0.496,
+   "median_depth": 0.314
+  },
+  {
+   "product_type": "Swimwear",
+   "articles": 583,
+   "p25": 16.115,
+   "median": 24.26,
+   "p75": 36.355,
+   "markdown_rate": 0.473,
+   "median_depth": 0.351
+  },
+  {
+   "product_type": "T-shirt",
+   "articles": 588,
+   "p25": 16.61,
+   "median": 25.53,
+   "p75": 37.828,
+   "markdown_rate": 0.534,
+   "median_depth": 0.351
+  },
+  {
+   "product_type": "Trousers",
+   "articles": 545,
+   "p25": 16.05,
+   "median": 23.12,
+   "p75": 35.73,
+   "markdown_rate": 0.492,
+   "median_depth": 0.351
+  }
+ ],
+ "markdown_timing_model": {
+  "n_train": 1564,
+  "n_test": 688,
+  "mae_gbm": 3.57261767820193,
+  "mae_type_mean": 5.662810245871808,
+  "spearman": 0.7360670332892469,
+  "importances": {
+   "early4": 0.891,
+   "first_price": 0.072,
+   "product_type_Swimwear": 0.019,
+   "product_type_Coat": 0.008,
+   "product_type_Skirt": 0.003
+  }
+ },
+ "forecast_wape_backtest": {
+  "naive_last4": 0.1151,
+  "seasonal_naive": 0.463,
+  "ridge_fourier": 0.2699
+ },
+ "sellthrough12_by_markdown": {
+  "false": 0.396,
+  "true": 0.287
+ }
+}

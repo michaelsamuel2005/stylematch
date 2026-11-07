@@ -1,0 +1,6 @@
+# optional, for the transformer / CLIP / zero-shot runs (need Hugging Face + an API key; not exercised in CI)
+sentence-transformers
+open-clip-torch
+torch
+transformers
+anthropic

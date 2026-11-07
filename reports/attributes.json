@@ -1,0 +1,105 @@
+{
+ "scores": [
+  {
+   "method": "tfidf+logreg",
+   "attribute": "product_type",
+   "accuracy": 0.9982425307557118,
+   "n": 1138
+  },
+  {
+   "method": "tfidf+logreg",
+   "attribute": "colour",
+   "accuracy": 0.9156414762741653,
+   "n": 1138
+  },
+  {
+   "method": "tfidf+logreg",
+   "attribute": "department",
+   "accuracy": 0.7565905096660809,
+   "n": 1138
+  }
+ ],
+ "top_failures": {
+  "product_type": [
+   [
+    "Sweater -> Trousers",
+    1
+   ],
+   [
+    "Shoes -> T-shirt",
+    1
+   ]
+  ],
+  "colour": [
+   [
+    "Grey -> Green",
+    4
+   ],
+   [
+    "Blue -> Pink",
+    4
+   ],
+   [
+    "Blue -> Red",
+    4
+   ],
+   [
+    "Grey -> Blue",
+    3
+   ],
+   [
+    "Brown -> Pink",
+    3
+   ]
+  ],
+  "department": [
+   [
+    "Ladieswear -> Menswear",
+    121
+   ],
+   [
+    "Menswear -> Ladieswear",
+    114
+   ],
+   [
+    "Kids -> Menswear",
+    17
+   ],
+   [
+    "Menswear -> Kids",
+    10
+   ],
+   [
+    "Ladieswear -> Kids",
+    8
+   ]
+  ]
+ },
+ "error_detection": [
+  {
+   "attribute": "product_type",
+   "precision": 0.9672131147540983,
+   "recall": 1.0,
+   "planted": 59
+  },
+  {
+   "attribute": "colour",
+   "precision": 0.40764331210191085,
+   "recall": 1.0,
+   "planted": 64
+  },
+  {
+   "attribute": "department",
+   "precision": 0.1884498480243161,
+   "recall": 0.9538461538461539,
+   "planted": 65
+  }
+ ],
+ "label_noise_in_train": {
+  "product_type": 0.06384213580963435,
+  "colour": 0.06065002901915264,
+  "department": 0.058908879860708065
+ },
+ "transformer": "not run here (needs Hugging Face); see src/stylematch/finetune.py",
+ "zero_shot_llm": "not run here (needs API key); see src/stylematch/llm_zero_shot.py"
+}
