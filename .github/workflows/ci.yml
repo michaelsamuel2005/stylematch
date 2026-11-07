@@ -2,17 +2,24 @@ name: ci
 on: [push, pull_request]
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
         with: {python-version: "3.11", cache: pip}
       - run: pip install -r requirements.txt
       - run: PYTHONPATH=src python -m pytest -q
       - run: PYTHONPATH=src python -m stylematch.twin && PYTHONPATH=src python scripts/run_match.py && PYTHONPATH=src python scripts/run_attributes.py && PYTHONPATH=src python scripts/run_price.py
   docker:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - run: docker build -t stylematch .
-      - run: docker run -d -p 8000:8000 --name s stylematch && sleep 12 && curl -sf localhost:8000/health
+      - name: start container and check /health
+        run: |
+          docker run -d -p 18080:8000 --name stylematch-ci stylematch
+          for i in $(seq 1 30); do
+            if curl -sf http://127.0.0.1:18080/health; then echo; echo "healthy"; exit 0; fi
+            sleep 2
+          done
+          echo "health check failed; container logs:"; docker logs stylematch-ci; exit 1
